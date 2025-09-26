@@ -2,7 +2,9 @@
 
 Three.js / React + Fiber.js app for experimenting with the Boid flocking algorithm.
 
-## Setup
+![demo-image](./public/boids-demo.png)
+
+## Get started
 
 ```bash
 npm install
