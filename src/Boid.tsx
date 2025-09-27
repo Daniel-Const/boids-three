@@ -1,6 +1,6 @@
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useState } from "react";
-import type { Mesh, Vector3 } from "three";
+import type { Mesh } from "three";
 import type { TuneableParams } from "./Params";
 
 type Vec3 = { x: number; y: number; z: number };
@@ -28,9 +28,7 @@ export const Boid = ({
   params,
 }: BoidParams) => {
   const [uuid, setUuid] = useState("");
-
   const size = 0.09;
-
   const {
     TURN_FACTOR,
     VISIBLE_RANGE,
@@ -75,7 +73,7 @@ export const Boid = ({
   const get_distance = (boid: Mesh, otherBoid: Mesh) => {
     return Math.sqrt(
       Math.abs(boid.position.x - otherBoid.position.x) +
-        Math.abs(boid.position.y - otherBoid.position.y),
+        Math.abs(boid.position.y - otherBoid.position.y)
     );
   };
 
@@ -138,7 +136,7 @@ export const Boid = ({
 
     // Speed cap
     const speed = Math.sqrt(
-      ref.velocity.x * ref.velocity.x + ref.velocity.y * ref.velocity.y,
+      ref.velocity.x * ref.velocity.x + ref.velocity.y * ref.velocity.y
     );
     if (speed > MAX_SPEED) {
       ref.velocity.x = (ref.velocity.x / speed) * MAX_SPEED;

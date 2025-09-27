@@ -18,7 +18,6 @@ export const App = () => {
         <ParamInputs
           params={params}
           onChange={(update: Partial<TuneableParams>) => {
-            console.log("updating...", update);
             setParams({ ...params, ...update });
           }}
         />
@@ -47,9 +46,9 @@ export const App = () => {
         />
         {/* VGB Box */}
         {/* <mesh>
-                <boxGeometry args={[-10, 10, 1]} />
-                <meshStandardMaterial wireframe />
-                </mesh> */}
+              <boxGeometry args={[-10, 10, 1]} />
+              <meshStandardMaterial wireframe />
+            </mesh> */}
         <Flock key={params.TOTAL_BOIDS} params={params} />
         <OrbitControls />
       </Canvas>

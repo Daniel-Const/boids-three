@@ -11,9 +11,7 @@ import { type TuneableParams } from "./Params";
 const MAX_POSITION = 4;
 const MAX_VELOCITY = 4;
 
-/**
- * Custom hook for generating random boids
- */
+// Custom hook for generating random boids
 const useRandomBoids = (totalBoids: number) => {
   const [boids, setBoids] = useState<BoidObject[]>([]);
   const boidRefs: any = useRef([]);

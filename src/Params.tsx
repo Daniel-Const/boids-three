@@ -1,5 +1,11 @@
-import { Box, Slider, Stack, Text, VStack } from "@chakra-ui/react";
+/**
+ * Tuneable Params
+ *
+ * Hyperparameters for controlling the Boid behavior
+ * UI for controlling these params
+ */
 
+import { Box, Slider, Stack, Text, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 
 export interface TuneableParams {
