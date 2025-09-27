@@ -10,6 +10,8 @@ import {
   type TuneableParams,
 } from "./Params.tsx";
 
+const SHOW_BOUNDARY = false;
+
 export const App = () => {
   const { params, setParams } = useTuneableParams();
   return (
@@ -23,32 +25,37 @@ export const App = () => {
         />
       </ChakraProvider>
 
-      <Canvas camera={{ position: [0, 0, 8], fov: 75 }}>
+      <Canvas camera={{ position: [0, 0, 8], fov: 90 }}>
         <color attach="background" args={["#000000"]} />
-        <ambientLight intensity={Math.PI / 4} color={"white"} />
+        <ambientLight intensity={Math.PI / 20} color={"white"} />
         <CustomSpotLight
           helper={false}
-          position={[8, 8, 8]}
-          angle={0.3}
+          position={[10, 5, 5]}
+          angle={0.5}
           penumbra={1}
           decay={0}
           intensity={Math.PI}
           color={"green"}
+          castShadow
         />
         <CustomSpotLight
           helper={false}
-          position={[-8, 8, 6]}
-          angle={0.3}
+          position={[-10, -5, -5]}
+          angle={0.5}
           penumbra={1}
           decay={0}
           intensity={Math.PI}
           color={"blue"}
+          castShadow
         />
-        {/* VGB Box */}
-        {/* <mesh>
-              <boxGeometry args={[-10, 10, 1]} />
-              <meshStandardMaterial wireframe />
-            </mesh> */}
+
+        {SHOW_BOUNDARY && (
+          <mesh>
+            <boxGeometry args={[-10, 10, 10]} />
+            <meshStandardMaterial wireframe />
+          </mesh>
+        )}
+
         <Flock key={params.TOTAL_BOIDS} params={params} />
         <OrbitControls />
       </Canvas>

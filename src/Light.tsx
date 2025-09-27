@@ -3,11 +3,11 @@ import { useRef } from "react";
 import { SpotLightHelper } from "three";
 
 export const CustomSpotLight = (
-  props: SpotLightProps & { helper: boolean },
+  props: SpotLightProps & { helper: boolean }
 ) => {
   const ref: any = useRef(null);
   if (props.helper) {
-    useHelper(ref, SpotLightHelper, "red");
+    useHelper(ref, SpotLightHelper, props.color);
   }
   return <spotLight ref={ref} {...props} />;
 };

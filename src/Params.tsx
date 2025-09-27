@@ -27,6 +27,8 @@ export interface TuneableParams {
   RIGHT_MARGIN: number;
   TOP_MARGIN: number;
   BOTTOM_MARGIN: number;
+  FAR_MARGIN: number;
+  CLOSE_MARGIN: number;
 
   TOTAL_BOIDS: number;
 }
@@ -47,6 +49,8 @@ const default_params = {
   RIGHT_MARGIN: 2.5,
   TOP_MARGIN: 2,
   BOTTOM_MARGIN: -2,
+  FAR_MARGIN: 2.5,
+  CLOSE_MARGIN: -2.5,
 
   TOTAL_BOIDS: 500,
 };

@@ -43,6 +43,8 @@ export const Boid = ({
     RIGHT_MARGIN,
     TOP_MARGIN,
     BOTTOM_MARGIN,
+    CLOSE_MARGIN,
+    FAR_MARGIN,
   } = params;
 
   const ref = useMemo(() => {
@@ -53,6 +55,7 @@ export const Boid = ({
   }, [uuid]);
 
   const avoidBoundary = () => {
+    // X Boundary
     if (ref.position.x < LEFT_MARGIN) {
       ref.velocity.x = ref.velocity.x + TURN_FACTOR;
     }
@@ -61,12 +64,22 @@ export const Boid = ({
       ref.velocity.x = ref.velocity.x - TURN_FACTOR;
     }
 
+    // Y Boundary
     if (ref.position.y < BOTTOM_MARGIN) {
       ref.velocity.y = ref.velocity.y + TURN_FACTOR;
     }
 
     if (ref.position.y > TOP_MARGIN) {
       ref.velocity.y = ref.velocity.y - TURN_FACTOR;
+    }
+
+    // Z Boundary
+    if (ref.position.z < CLOSE_MARGIN) {
+      ref.velocity.z = ref.velocity.z + TURN_FACTOR;
+    }
+
+    if (ref.position.z > FAR_MARGIN) {
+      ref.velocity.z = ref.velocity.z - TURN_FACTOR;
     }
   };
 
@@ -81,12 +94,15 @@ export const Boid = ({
   const behavior = () => {
     let close_dx = 0;
     let close_dy = 0;
+    let close_dz = 0;
 
     let xvel_avg = 0;
     let yvel_avg = 0;
+    let zvel_avg = 0;
 
     let xpos_avg = 0;
     let ypos_avg = 0;
+    let zpos_avg = 0;
 
     let neighboring_boids = 0;
 
@@ -96,9 +112,11 @@ export const Boid = ({
       if (distance < VISIBLE_RANGE) {
         xvel_avg += boid.velocity.x;
         yvel_avg += boid.velocity.y;
+        zvel_avg += boid.velocity.z;
 
         xpos_avg += boid.position.x;
         ypos_avg += boid.position.y;
+        zpos_avg += boid.position.z;
 
         neighboring_boids += 1;
       }
@@ -106,25 +124,33 @@ export const Boid = ({
       if (distance < PROTECTED_RANGE) {
         close_dx += ref.position.x - boid.position.x;
         close_dy += ref.position.y - boid.position.y;
+        close_dz += ref.position.y - boid.position.y;
       }
     }
 
     // Separation
     ref.velocity.x += close_dx * AVOID_FACTOR;
     ref.velocity.y += close_dy * AVOID_FACTOR;
+    ref.velocity.z += close_dz * AVOID_FACTOR;
 
     if (neighboring_boids > 0) {
       // Alignment
       xvel_avg = xvel_avg / neighboring_boids;
       yvel_avg = yvel_avg / neighboring_boids;
+      zvel_avg = zvel_avg / neighboring_boids;
+
       ref.velocity.x += (xvel_avg - ref.velocity.x) * MATCHING_FACTOR;
       ref.velocity.y += (yvel_avg - ref.velocity.y) * MATCHING_FACTOR;
+      ref.velocity.z += (zvel_avg - ref.velocity.z) * MATCHING_FACTOR;
 
       // Cohesion
       xpos_avg = xpos_avg / neighboring_boids;
       ypos_avg = ypos_avg / neighboring_boids;
+      zpos_avg = zpos_avg / neighboring_boids;
+
       ref.velocity.x += (xpos_avg - ref.position.x) * CENTERING_FACTOR;
       ref.velocity.y += (ypos_avg - ref.position.y) * CENTERING_FACTOR;
+      ref.velocity.z += (zpos_avg - ref.position.z) * CENTERING_FACTOR;
     }
 
     // Bias
@@ -136,15 +162,20 @@ export const Boid = ({
 
     // Speed cap
     const speed = Math.sqrt(
-      ref.velocity.x * ref.velocity.x + ref.velocity.y * ref.velocity.y
+      ref.velocity.x * ref.velocity.x +
+        ref.velocity.y * ref.velocity.y +
+        ref.velocity.z * ref.velocity.z
     );
+
     if (speed > MAX_SPEED) {
       ref.velocity.x = (ref.velocity.x / speed) * MAX_SPEED;
       ref.velocity.y = (ref.velocity.y / speed) * MAX_SPEED;
+      ref.velocity.z = (ref.velocity.z / speed) * MAX_SPEED;
     }
     if (speed < MIN_SPEED) {
       ref.velocity.x = (ref.velocity.x / speed) * MIN_SPEED;
       ref.velocity.y = (ref.velocity.y / speed) * MIN_SPEED;
+      ref.velocity.z = (ref.velocity.z / speed) * MIN_SPEED;
     }
   };
 
@@ -160,6 +191,7 @@ export const Boid = ({
     // Update position
     ref.position.x += ref.velocity.x * delta;
     ref.position.y += ref.velocity.y * delta;
+    ref.position.z += ref.velocity.z * delta;
   });
 
   return (
@@ -172,7 +204,7 @@ export const Boid = ({
       }}
     >
       <boxGeometry args={[size, size, size]} />
-      <meshStandardMaterial color={"hotpink"} />
+      <meshStandardMaterial color={"white"} />
     </mesh>
   );
 };

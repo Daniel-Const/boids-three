@@ -1,8 +1,10 @@
 # Boids
 
-Three.js / React + Fiber.js app for experimenting with the Boid flocking algorithm.
+Experimenting with Boids flocking algorithm in 3D using Three.js / React Fiber.
 
-![demo-image](./public/boids-demo.png)
+https://daniel-const.github.io/boids-three/
+
+![demo-image](./public/boids-demo3.png)
 
 ## Get started
 
@@ -11,9 +13,6 @@ npm install
 npm run dev
 ```
 
-## TODO
+## References
 
-- Add UI inputs for tuning params (Separation, Alignment, Cohesion etc.)
-- Extend to 3D (Add Z direction to all behavior controls)
-- Optimize / Improve performance on larger number of boids
-- Change boid shape? / Tweak styles
+- https://vanhunteradams.com/Pico/Animal_Movement/Boids-algorithm.html

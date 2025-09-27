@@ -11,6 +11,10 @@ import { type TuneableParams } from "./Params";
 const MAX_POSITION = 4;
 const MAX_VELOCITY = 4;
 
+const sampleRange = (min: number, max: number) => {
+  return (Math.random() * (max - min) + min)
+}
+
 // Custom hook for generating random boids
 const useRandomBoids = (totalBoids: number) => {
   const [boids, setBoids] = useState<BoidObject[]>([]);
@@ -21,14 +25,14 @@ const useRandomBoids = (totalBoids: number) => {
     for (let i = 0; i < totalBoids; i++) {
       randomBoids.push({
         position: {
-          x: Math.random() * MAX_POSITION,
-          y: Math.random() * 5,
-          z: 1,
+          x: sampleRange(-MAX_POSITION, MAX_POSITION),
+          y: sampleRange(-MAX_POSITION, MAX_POSITION),
+          z: sampleRange(-MAX_POSITION, MAX_POSITION),
         },
         velocity: {
           x: Math.random() * MAX_VELOCITY,
           y: Math.random() * 1,
-          z: 0,
+          z: Math.random() * 1,
         },
       });
       boidRefs.current[i] = null;
