@@ -1,18 +1,18 @@
-import { useRef, useState } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useRef, useState } from "react";
+import { useFrame } from "@react-three/fiber";
 
 export const Box = (props: any) => {
   // This reference will give us direct access to the mesh
-  const meshRef = useRef<{rotation: {x: number}}>(null)
+  const meshRef = useRef<{ rotation: { x: number } }>(null);
   // Set up state for the hovered and active state
-  const [hovered, setHover] = useState(false)
-  const [active, setActive] = useState(false)
+  const [hovered, setHover] = useState(false);
+  const [active, setActive] = useState(false);
   // Subscribe this component to the render-loop, rotate the mesh every frame
   useFrame((state, delta) => {
     if (meshRef?.current) {
-      meshRef.current.rotation.x += delta
+      meshRef.current.rotation.x += delta;
     }
-  })
+  });
   // Return view, these are regular three.js elements expressed in JSX
   return (
     <mesh
@@ -21,9 +21,10 @@ export const Box = (props: any) => {
       scale={active ? 1.5 : 1}
       onClick={(event) => setActive(!active)}
       onPointerOver={(event) => setHover(true)}
-      onPointerOut={(event) => setHover(false)}>
+      onPointerOut={(event) => setHover(false)}
+    >
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      <meshStandardMaterial color={hovered ? "hotpink" : "orange"} />
     </mesh>
-  )
-}
+  );
+};
