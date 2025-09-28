@@ -12,8 +12,8 @@ const MAX_POSITION = 4;
 const MAX_VELOCITY = 4;
 
 const sampleRange = (min: number, max: number) => {
-  return (Math.random() * (max - min) + min)
-}
+  return Math.random() * (max - min) + min;
+};
 
 // Custom hook for generating random boids
 const useRandomBoids = (totalBoids: number) => {

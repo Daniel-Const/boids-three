@@ -5,16 +5,9 @@
  * UI for controlling these params
  */
 
-import {
-  Box,
-  Checkbox,
-  Collapsible,
-  Slider,
-  Stack,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import { useCallback, useMemo, useState } from "react";
+import { Box, Checkbox, Collapsible, Icon, Stack } from "@chakra-ui/react";
+import { useState } from "react";
+import { VscSettings } from "react-icons/vsc";
 import { ParamSlider } from "./Slider";
 
 export interface TuneableParams {
@@ -96,7 +89,9 @@ export const ParamInputs = ({
       <Collapsible.Root unmountOnExit>
         <Stack gap="4">
           <Collapsible.Trigger width="200px" style={{ color: "white" }}>
-            Settings
+            <Icon size="lg">
+              <VscSettings />
+            </Icon>
           </Collapsible.Trigger>
           <Collapsible.Content>
             <ParamSlider
