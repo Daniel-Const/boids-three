@@ -1,7 +1,7 @@
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useState } from "react";
 import type { Mesh } from "three";
-import type { TuneableParams } from "./Params";
+import type { TuneableParams } from "./UI/Params";
 
 type Vec3 = { x: number; y: number; z: number };
 

@@ -6,7 +6,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Boid, type BoidObject } from "./Boid";
-import { type TuneableParams } from "./Params";
+import { type TuneableParams } from "./UI/Params";
 
 const MAX_POSITION = 4;
 const MAX_VELOCITY = 4;

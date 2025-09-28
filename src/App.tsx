@@ -8,9 +8,7 @@ import {
   ParamInputs,
   useTuneableParams,
   type TuneableParams,
-} from "./Params.tsx";
-
-const SHOW_BOUNDARY = false;
+} from "./UI/Params.tsx";
 
 export const App = () => {
   const { params, setParams } = useTuneableParams();
@@ -49,7 +47,7 @@ export const App = () => {
           castShadow
         />
 
-        {SHOW_BOUNDARY && (
+        {params.SHOW_BOUNDARY && (
           <mesh>
             <boxGeometry args={[-10, 10, 10]} />
             <meshStandardMaterial wireframe />
