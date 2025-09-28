@@ -156,7 +156,7 @@ export const ParamInputs = ({
             />
             <Checkbox.Root
               style={{ paddingTop: "1em" }}
-              onChange={(e) => {
+              onChange={(_) => {
                 onChange({ ...params, SHOW_BOUNDARY: !params.SHOW_BOUNDARY });
               }}
             >
